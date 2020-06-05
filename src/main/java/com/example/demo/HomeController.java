@@ -112,8 +112,32 @@ public class HomeController {
         return "admin";
     }
 
+    @RequestMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model, Principal principal){
+
+        User toBeDeletedUser = userRepository.findById(id).get();
+
+        String tempUsername = toBeDeletedUser.getFirstName() + " " + toBeDeletedUser.getLastName();
 
 
+        for(Message msg : messageRepository.findAllBySentBy(tempUsername)){
+            Long temp = msg.getId();
+            messageRepository.deleteById(temp);
+        }
+
+        userRepository.deleteById(id);
+
+        model.addAttribute("allUsers", userRepository.findAll());
+
+//        chekc if the following is not repetition @both herea and also in "/disable-user"
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+
+        return "admin";
+    }
 
     @RequestMapping("/login")
     public String login() {
