@@ -4,24 +4,13 @@
     <meta charset="UTF-8">
     <title>Show</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        table, th, td{
-            border: 1px solid green;
-        }
-        table {
-            width: 100%;
-            background-color: #f1f1c1;
-        }
-        th{
-            text-align: center;
-        }
 
-    </style>
+    <th:block th:insert="layouts :: header"></th:block>
 </head>
 <body>
-<br/>
-<div th:replace="base :: navlinks"></div><br/><br/>
 
+<br/>
+<nav th:replace="layouts :: navbar"></nav>
 <div class="container">
     <div class="jumbotron d-flex justify-content-center" style="background-color: darkgreen">
         <div class="col-md-8">
@@ -29,7 +18,7 @@
             <br/>
             <br/>
             <div class="card" style="width: 40rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="..." alt="Profile Picture">
                 <div class="card-body">
 <!--                    <div class="card-title" th:text="${message.sentBy}"></div>-->
                     <h4 class="card-title"> [[${message.sentBy}]]</h4>
@@ -54,42 +43,19 @@
 
 
 
-<!--<div class="container" >-->
-
-
-
-
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <th><h3>Name: </h3></th>-->
-<!--            <th><h3>Date: </h3></th>-->
-<!--            <th><h3>Message: </h3></th>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            &lt;!&ndash; Name: &ndash;&gt;-->
-<!--            <td width="30%"><h4 th:text = "${message.sentBy}"></h4></td>-->
-<!--            &lt;!&ndash; date &ndash;&gt;-->
-<!--            <td width="10%"><h4 th:text = "${message.postedDate}"></h4></td>-->
-<!--            <td width="60%"><h4 th:text = "${message.content}"></h4></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-
-<!--            <td></td>-->
-<!--            <td >-->
-<!--                <a class="btn btn-danger" th:href = "@{/delete/{id}(id = ${message.id})}">Delete this Message</a>-->
-<!--            </td>-->
-<!--            <td></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-
-
-
 
 <div th:replace="base :: footer"></div>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
