@@ -46,14 +46,12 @@ public class HomeController {
         Message messageWithUserName = new Message();
         if(userService.getUser() != null) {
             String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
-
             messageWithUserName.setSentBy(loggedUserName);
         }
         if(userService.getUser() != null){
             model.addAttribute("loggedUser", userService.getUser());
         }
         model.addAttribute("message", messageWithUserName);
-
         return "form";
     }
 
@@ -92,6 +90,17 @@ public class HomeController {
     public String delMessage(@PathVariable("id") long id){
         messageRepository.deleteById(id);
         return "redirect:/";
+    }
+
+    @RequestMapping("/update-message/{id}")
+    public String updateMessage(@PathVariable("id") long id, Model model){
+        model.addAttribute("message", messageRepository.findById(id).get());
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+
+        return "form";
+
     }
 
     @RequestMapping("/displayUsers")
