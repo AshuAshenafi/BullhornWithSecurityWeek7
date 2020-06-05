@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -24,23 +24,50 @@ public class HomeController {
     RoleRepository roleRepository;
 
     @Autowired
+    MessageRepository messageRepository;
+
+    @Autowired
     UserService userService;
 
     @RequestMapping("/")
     public String index(Model model) {
-        if(userService.getUser() != null){
-            model.addAttribute("loggedUser", userService.getUser());
-        }
 
-        return "index";
+        model.addAttribute("messages", messageRepository.findAll());
+        return "list";
+//        return "index";
+    }
+    @GetMapping("/add-form")
+    public String newMessage(Model model){
+        model.addAttribute("message", new Message());
+
+        return "form";
     }
 
-//    @RequestMapping("/")
-//    public String index(Principal principal, Model model) {
-//        String username = principal.getName();
-//        model.addAttribute("loggedUser", userRepository.findByUsername(username));
-//        return "index";
-//    }
+    @PostMapping("/process-form")
+    public String processMessage(@Valid @ModelAttribute("message") Message message, BindingResult result, Model model) {
+
+//        public String processMessage(@Valid @ModelAttribute("message") Message message,
+//                @RequestParam("file") MultipartFile file, BindingResult result) {
+
+        model.addAttribute("message", message);
+        if(userService.getUser() != null) {
+//            model.addAttribute("logged-user", userService.getUser());
+        String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
+            System.out.println("line 56 HomeCntrl logged user first name is = " + loggedUserName);
+//        String loggedUserName = userService.getUser().getLastName() + " " + userService.getUser().getFirstName();
+//        message.setSentBy(loggedUserName);
+        }
+
+        if (result.hasErrors()) {
+
+            return "redirect:/form";
+        }
+
+
+        messageRepository.save(message);
+        return "redirect:/";
+
+    }
 
 
 

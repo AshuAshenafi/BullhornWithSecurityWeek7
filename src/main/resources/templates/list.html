@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>list</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        #poster{
+            color:blue;
+        }
+        table, th, td {
+            border-collapse:collapse;
+
+            border: none;
+        }
+        hr {
+            height: 10px;
+            border: 0;
+            box-shadow: 0 10px 10px -10px #8c8b8b inset;
+        }
+
+    </style>
+</head>
+<body>
+<br/>
+<div th:replace="base :: navlinks"></div>
+<br/>
+
+<div class="container" >
+    <div class="jumbotron">
+        <h1>Basic Bullhorn App</h1>
+        <p>This is a simple application that lists messages together with the content, posted date, and photo</p>
+        <a href="/add-form" class="btn btn-info btn-lg"   >Add a Message</a>
+    </div>
+</div>
+
+
+<div class="container" th:each="message : ${messages}">
+    <div class="col-lg-1" >
+
+
+
+
+    </div>
+    <div class="col-lg-9">
+        <table style="width:90%;" border = "0">
+            <tr >
+                <td style="font-size: x-large;" ><h3 id="poster"   th:text="${message.sentBy}"></h3></td>
+
+                <td style="font-size: small;text-align: right;"><h5 th:text="${message.postedDate}"></h5></td>
+
+                <td  style="text-align: right">
+
+                    <a class="btn btn-primary btn-xs"  th:href = "@{/update/{id}(id=${message.id})}">Update</a>
+                    <a class="btn btn-success btn-xs" th:href = "@{/detail/{id}(id=${message.id})}">Details</a>
+                    <a class="btn btn-danger btn-xs" th:href = "@{/delete/{id}(id=${message.id})}">Delete</a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="font-size: medium"> <h4 th:text="${message.content}"></h4> </td>
+                <td></td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+
+    <br/>
+
+    <div class="container">
+        <div class="col-lg-1">
+
+        </div>
+        <div class="col-lg-9">
+            <table style="width: 100%;">
+                <tr>
+                    <td width="25%" style="width: 25%;text-align: center">Share</td>
+                    <td width="25%" style="width: 25%;text-align: center">Like</td>
+                    <td width="25%" style="width: 25%;text-align: center">Viewers</td>
+                    <td width="25%" style="width: 25%;text-align: center">Comment</td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<br/><br/>
+<div th:replace="base :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+</body>
+</html>
