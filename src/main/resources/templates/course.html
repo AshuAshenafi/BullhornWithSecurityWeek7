@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>course</title>
+    <th:block th:insert="layouts :: header"></th:block>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<h1>Course Page</h1>
+
+<a ><h3>Course</h3></a><br>
+<a th:href="@{/teacher}"><h3>Teacher</h3></a><br>
+<a th:href="@{/student}"><h3>Student</h3></a><br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+</form>
+</body>
+</html>

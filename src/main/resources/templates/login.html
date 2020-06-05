@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <th:block th:insert="layouts :: header"></th:block>
+</head>
+<body>
+<nav th:replace="layouts :: navbar-guest"></nav>
+<h1>Login Page</h1>
+<hr>
+<p>You can login as <strong>USER</strong>:</p>
+<p>Username = <strong>bart</strong> and Password = <strong>bart</strong></p>
+<hr>
+<p>You can login as <strong>ADMIN</strong>:</p>
+<p>Username = <strong>ted</strong> and Password = <strong>ted</strong></p>
+<hr>
+<p>You can login as both <strong>USER</strong> and <strong>ADMIN</strong>:</p>
+<p>Username = <strong>super</strong> and Password = <strong>super</strong></p>
+<hr>
+
+
+<div th:if="${param.error}" style="color: red">
+    Invalid username or password
+</div>
+
+<div th:if="${param.logout}" style="color: green">
+    YOU HAVE BEEN LOGGED OUT.
+    <br>
+</div>
+
+<br>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>User name: <input type="text" name="username"/></label>
+    </div>
+    <br/>
+    <div>
+        <label>Password: <input type="text" name="password"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Sign in"/>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>secure</title>
+    <th:block th:insert="layouts :: header"></th:block>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<h1>Secure Page</h1>
+<h4>Name:</h4>
+<p>[[${user.firstName}]]<span style="color: white">-</span>[[${user.lastName}]]</p>
+<br/>
+<h4>Email:</h4>
+<p th:text="${user.email}"></p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+</form>
+
+</body>
+</html>
