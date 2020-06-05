@@ -20,7 +20,7 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" style="color: greenyellow">
                     Welcome
                     <span th:text="${#authentication.name}">
                         </span>
@@ -35,13 +35,13 @@
                 <a class="nav-link" th:href="@{/displayUsers}">Admin</a>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="/teacher">Teacher</a>
+                <a class="nav-link" href="/teacher"></a>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="/student">Student</a>
+                <a class="nav-link" href="/student"></a>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="/course">Course</a>
+                <a class="nav-link" href="/course"></a>
             </li>
         </ul>
 
@@ -93,10 +93,10 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#"></a>
             </li>
             <li>
 

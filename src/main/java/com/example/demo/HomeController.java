@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.validation.Valid;
-import java.io.IOException;
+
 import java.security.Principal;
 import java.util.HashSet;
-import java.util.Map;
+
 import java.util.Set;
 
 @Controller
@@ -102,7 +102,7 @@ public class HomeController {
             model.addAttribute("loggedUser", userService.getUser());
         }
         model.addAttribute("allUsers", userRepository.findAll());
-//        model.addAttribute("allRoles", roleRepository.findAll());
+
 
         return "admin";
     }
@@ -155,30 +155,6 @@ public class HomeController {
         return "login";
     }
 
-//    @RequestMapping("/course")
-//    public String course(Model model) {
-//        if(userService.getUser() != null){
-//            model.addAttribute("loggedUser", userService.getUser());
-//        }
-//        return "course";
-//    }
-
-//    @RequestMapping("/teacher")
-//    public String teacher(Model model) {
-//        if(userService.getUser() != null){
-//            model.addAttribute("loggedUser", userService.getUser());
-//        }
-//        return "teacher";
-//    }
-
-//    @RequestMapping("/student")
-//    public String student(Model model) {
-//        if(userService.getUser() != null){
-//            model.addAttribute("loggedUser", userService.getUser());
-//        }
-//        return "student";
-//    }
-
     @RequestMapping("/admin")
     public String admin(Model model){
         if(userService.getUser() != null){
@@ -201,44 +177,6 @@ public class HomeController {
             return "secure";
         }
 
-//    @GetMapping("/register")
-//    public String showRegistrationPage(Principal principal, Model model) {
-//    model.addAttribute("newUser", new User());
-//        String username = principal.getName();
-//        model.addAttribute("loggedUser", userRepository.findByUsername(username));
-//        if(userService.getUser() != null){
-//            model.addAttribute("loggedUser", userService.getUser());
-//        }
-//    return "register";
-//    }
-
-//    @PostMapping("/processRegister")
-//    public String processRegistrationPage(@Valid @ModelAttribute("newUser") User user, BindingResult result, Principal principal, Model model) {
-//        if(userService.getUser() != null){
-//            model.addAttribute("loggedUser", userService.getUser());
-//        }
-//
-//        model.addAttribute("newUser", user);
-//
-//    String username = principal.getName();
-//    model.addAttribute("loggedUser", userRepository.findByUsername(username));
-//    if(result.hasErrors()){
-//        user.clearPassword();
-//        return "register";
-//    }
-//    else{
-//        model.addAttribute("message", "User Account Created!");
-//
-//        user.setEnabled(true);
-//        Role role = new Role(user.getUsername(), "ROLE_USER");
-//        Set<Role> roles = new HashSet<Role>();
-//        roles.add(role);
-//
-//        roleRepository.save(role);
-//        userRepository.save(user);
-//        }
-//        return "index";
-//    }
 
     @RequestMapping("/logout")
     public String logout() {
@@ -272,7 +210,7 @@ public class HomeController {
             userRepository.save((user));
 
         }
-//        return "test";
+
         return "redirect:/";
     }
 }
