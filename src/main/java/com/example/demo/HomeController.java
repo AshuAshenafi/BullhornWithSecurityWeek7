@@ -52,16 +52,12 @@ public class HomeController {
     @PostMapping("/process-form")
     public String processMessage(@Valid @ModelAttribute("message") Message message, BindingResult result, Model model) {
 
-//        public String processMessage(@Valid @ModelAttribute("message") Message message,
-//                @RequestParam("file") MultipartFile file, BindingResult result) {
 
         model.addAttribute("message", message);
         if(userService.getUser() != null) {
-//            model.addAttribute("logged-user", userService.getUser());
+
         String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
-            System.out.println("line 56 HomeCntrl logged user first name is = " + loggedUserName);
-//        String loggedUserName = userService.getUser().getLastName() + " " + userService.getUser().getFirstName();
-//        message.setSentBy(loggedUserName);
+
         }
 
         if (result.hasErrors()) {
@@ -81,11 +77,11 @@ public class HomeController {
         return "show";
     }
 
-//    @RequestMapping("/delete/{id}")
-//    public String delMessage(@PathVariable("id") long id){
-//        messageRepository.deleteById(id);
-//        return "redirect:/";
-//    }
+    @RequestMapping("/delete/{id}")
+    public String delMessage(@PathVariable("id") long id){
+        messageRepository.deleteById(id);
+        return "redirect:/";
+    }
 
     @RequestMapping("/login")
     public String login() {
