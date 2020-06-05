@@ -233,5 +233,37 @@ public class HomeController {
         return "redirect:/login?logout=true";
     }
 
+    @GetMapping("/guestRegister")
+    public String guestRegisterationPage(Model model) {
+        model.addAttribute("user", new User());
+        return "guestRegister";
+    }
+
+    @RequestMapping("/guestProcess")
+    public String processRegisterationPage(@Valid @ModelAttribute("user") User user,
+                                           BindingResult result, Model model) {
+        model.addAttribute("user", user);
+
+        if(result.hasErrors()) {
+            user.clearPassword();
+            return "guestRegister";
+        }
+        else {
+            model.addAttribute("message", "User Account Created");
+
+            user.setEnabled(true);
+            Role role = new Role(user.getUsername(), "ROLE_USER");
+            Set<Role> roles = new HashSet<Role>();
+            roles.add(role);
+
+            roleRepository.save(role);
+            userRepository.save((user));
+
+        }
+//        return "test";
+        return "redirect:/";
+    }
+
+
 
 }
