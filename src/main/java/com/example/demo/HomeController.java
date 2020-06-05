@@ -83,6 +83,38 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/displayUsers")
+    public String delMessage(Model model, Principal principal){
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+        model.addAttribute("allUsers", userRepository.findAll());
+//        model.addAttribute("allRoles", roleRepository.findAll());
+
+        return "admin";
+    }
+
+    @RequestMapping("/disable-user/{id}")
+    public String disableUser(@PathVariable("id") long id, Model model, Principal principal){
+        User tempUser = new User();
+        tempUser = userRepository.findById(id).get();
+        tempUser.setEnabled(false);
+        userRepository.save(tempUser);
+        model.addAttribute("allUsers", userRepository.findAll());
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+
+        return "admin";
+    }
+
+
+
+
     @RequestMapping("/login")
     public String login() {
         return "login";

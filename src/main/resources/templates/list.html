@@ -37,13 +37,11 @@
         <a href="/add-form" class="btn btn-info btn-lg"   >Add a Message</a>
     </div>
 </div>
-
+<!--The following list has to be only for admin priviledges-->
+<a th:href="@{/displayUsers}">Display All Users</a>
 
 <div class="container" th:each="message : ${messages}">
     <div class="col-lg-1" >
-
-
-
 
     </div>
     <div class="col-lg-9">
