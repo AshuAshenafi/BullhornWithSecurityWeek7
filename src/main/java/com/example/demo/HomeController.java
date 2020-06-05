@@ -38,7 +38,13 @@ public class HomeController {
     }
     @GetMapping("/add-form")
     public String newMessage(Model model){
-        model.addAttribute("message", new Message());
+        Message messageWithUserName = new Message();
+        if(userService.getUser() != null) {
+            String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
+//            Message messageWithUserName = new Message();
+            messageWithUserName.setSentBy(loggedUserName);
+        }
+        model.addAttribute("message", messageWithUserName);
 
         return "form";
     }
@@ -69,7 +75,17 @@ public class HomeController {
 
     }
 
+    @RequestMapping("/detail/{id}")
+    public String showMessage(@PathVariable("id") long id, Model model){
+        model.addAttribute("message", messageRepository.findById(id).get());
+        return "show";
+    }
 
+//    @RequestMapping("/delete/{id}")
+//    public String delMessage(@PathVariable("id") long id){
+//        messageRepository.deleteById(id);
+//        return "redirect:/";
+//    }
 
     @RequestMapping("/login")
     public String login() {

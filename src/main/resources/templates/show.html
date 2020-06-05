@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        table, th, td{
+            border: 1px solid green;
+        }
+        table {
+            width: 100%;
+            background-color: #f1f1c1;
+        }
+        th{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<br/>
+<div th:replace="base :: navlinks"></div><br/><br/>
+
+<div class="container">
+    <div class="jumbotron d-flex justify-content-center" style="background-color: darkgreen">
+        <div class="col-md-8">
+            <br/>
+            <br/>
+            <br/>
+            <div class="card" style="width: 40rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+<!--                    <div class="card-title" th:text="${message.sentBy}"></div>-->
+                    <h4 class="card-title"> [[${message.sentBy}]]</h4>
+                    <p class="card-text">You can always view your information.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Date: <h4 th:text="${message.postedDate}"></h4></li>
+                    <li class="list-group-item">Your Message: <h4 th:text="${message.content}"></li>
+                    <li class="list-group-item"></li>
+                </ul>
+                <div class="card-body">
+                    <a href="http://www.twitter.com" class="card-link">twitter</a>
+                    <a href="http://www.facebook.com" class="card-link">facebook</a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="container" >-->
+
+
+
+
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <th><h3>Name: </h3></th>-->
+<!--            <th><h3>Date: </h3></th>-->
+<!--            <th><h3>Message: </h3></th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            &lt;!&ndash; Name: &ndash;&gt;-->
+<!--            <td width="30%"><h4 th:text = "${message.sentBy}"></h4></td>-->
+<!--            &lt;!&ndash; date &ndash;&gt;-->
+<!--            <td width="10%"><h4 th:text = "${message.postedDate}"></h4></td>-->
+<!--            <td width="60%"><h4 th:text = "${message.content}"></h4></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+
+<!--            <td></td>-->
+<!--            <td >-->
+<!--                <a class="btn btn-danger" th:href = "@{/delete/{id}(id = ${message.id})}">Delete this Message</a>-->
+<!--            </td>-->
+<!--            <td></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
+
+
+
+
+<div th:replace="base :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+</body>
+</html>

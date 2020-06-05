@@ -23,7 +23,7 @@ public class SpringSecurityJdbcDataSource {
 
             User admin1 = new User("admin", "ted@domain.com", "admin",
                     "Teddy", "Bear", true);
-            Role adminRole1 = new Role("ted", "ROLE_ADMIN");
+            Role adminRole1 = new Role("admin", "ROLE_ADMIN");
 
             userRepository.save(admin1);
             roleRepository.save(adminRole1);
