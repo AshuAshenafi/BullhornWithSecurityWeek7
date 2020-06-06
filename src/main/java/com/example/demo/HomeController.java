@@ -96,11 +96,16 @@ public class HomeController {
     public String updateMessage(@PathVariable("id") long id, Model model){
         model.addAttribute("message", messageRepository.findById(id).get());
         if(userService.getUser() != null){
+
+            String tempLoggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
+            String tempMessageOwnerName = messageRepository.findById(id).get().getSentBy();
+            if(!tempLoggedUserName.equals(tempMessageOwnerName)){
+                return "canNotUpdate";
+            }
             model.addAttribute("loggedUser", userService.getUser());
         }
 
         return "form";
-
     }
 
     @RequestMapping("/displayUsers")
@@ -111,7 +116,6 @@ public class HomeController {
             model.addAttribute("loggedUser", userService.getUser());
         }
         model.addAttribute("allUsers", userRepository.findAll());
-
 
         return "admin";
     }
@@ -221,5 +225,14 @@ public class HomeController {
         }
 
         return "redirect:/";
+    }
+    @RequestMapping("/formTest")
+    public String formTest(Model model) {
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+
+        model.addAttribute("messages", messageRepository.findAll());
+        return "formTest";
     }
 }
