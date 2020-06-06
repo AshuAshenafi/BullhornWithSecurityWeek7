@@ -56,7 +56,8 @@ public class HomeController {
     }
 
     @PostMapping("/process-form")
-    public String processMessage(@Valid@ModelAttribute("message") Message message, BindingResult result, Model model) {
+    public String processMessage(@Valid@ModelAttribute("message") Message message,
+                                 BindingResult result, Model model) {
 
 
         model.addAttribute("message", message);
@@ -66,7 +67,6 @@ public class HomeController {
         }
 
         if (result.hasErrors()) {
-
             return "form";
         }
 

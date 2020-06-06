@@ -3,6 +3,8 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="users_db")
@@ -11,18 +13,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank(message="Must give Username!")
+    @Size(min=2, max=50)
     @Column(name = "username")
     private String username;
 
+    @NotBlank(message="Must give Email Address!")
+    @Size(min=3, max=50)
     @Column(name = "email", nullable = false)
     private String email;
 
+    @NotBlank(message="Password must be atleast three Characters!")
+    @Size(min=3)
     @Column(name = "password")
     private String password;
 
+    @NotBlank(message="Must give First Name!")
+    @Size(min=2, max=50)
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message="Must give Last Name!")
+    @Size(min=2, max=50)
     @Column(name = "last_name")
     private String lastName;
 
