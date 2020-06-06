@@ -1,10 +1,15 @@
 package com.example.demo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Entity
 public class Message {
@@ -12,13 +17,16 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
+    @NotEmpty
+    @Size(min=4)
     private String content;
 
     @NotNull
-    private String postedDate;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+    private LocalDate postedDate;
 
     @NotNull
+    @Size(min=4)
     private String sentBy;
 
 //    private String headshot;
@@ -42,11 +50,11 @@ public class Message {
         this.content = content;
     }
 
-    public String getPostedDate() {
+    public LocalDate getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(String postedDate) {
+    public void setPostedDate(LocalDate postedDate) {
         this.postedDate = postedDate;
     }
 

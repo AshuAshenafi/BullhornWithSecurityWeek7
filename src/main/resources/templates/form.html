@@ -38,8 +38,7 @@
             <label for="InputMessage1" class="col-sm-2 control-label">Messsage</label>
             <div class="col-sm-5">
                 <textarea class="form-control" th:field = "*{content}" rows="4" id="InputMessage1"></textarea>
-                <span th:if = "${#fields.hasErrors('content')}"
-                      th:errors = "*{content}"></span>
+                <span th:if = "${#fields.hasErrors('content')}" th:errors = "*{content}"></span>
             </div>
         </div>
     </div>

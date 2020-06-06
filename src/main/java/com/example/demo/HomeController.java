@@ -56,25 +56,22 @@ public class HomeController {
     }
 
     @PostMapping("/process-form")
-    public String processMessage(@Valid @ModelAttribute("message") Message message, BindingResult result, Model model) {
+    public String processMessage(@Valid@ModelAttribute("message") Message message, BindingResult result, Model model) {
 
 
         model.addAttribute("message", message);
         if(userService.getUser() != null) {
-
-        String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
-
+            String loggedUserName = userService.getUser().getFirstName() + " " + userService.getUser().getLastName();
+            model.addAttribute("loggedUser", userService.getUser());
         }
 
         if (result.hasErrors()) {
 
-            return "redirect:/form";
+            return "form";
         }
-
 
         messageRepository.save(message);
         return "redirect:/";
-
     }
 
     @RequestMapping("/detail/{id}")
