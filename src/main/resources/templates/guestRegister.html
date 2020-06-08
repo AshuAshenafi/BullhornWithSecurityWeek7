@@ -9,56 +9,6 @@
 <!-- Navbar -->
 <nav th:replace="test-navbar :: navlinks"></nav>
 
-<!--<h4>New User Registration</h4>-->
-
-<!--<form autocomplete="off"-->
-<!--      action="#"-->
-<!--      th:action="@{/guestProcess}"-->
-<!--      th:object="${user}" method="post">-->
-<!--    First Name-->
-<!--    <input type="text" id="firstName" placeholder="First Name here" th:field="*{firstName}"/>-->
-<!--    <mark>-->
-<!--        <strong>-->
-<!--            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>-->
-<!--        </strong>-->
-<!--    </mark>-->
-<!--    <br/>-->
-<!--    Last Name-->
-<!--    <input type="text" id="lastName" placeholder="Last Name"-->
-<!--           th:field="*{lastName}"/>-->
-<!--    <mark><strong>-->
-<!--        <span th:if="${#fields.hasErrors('lastName')}"-->
-<!--              th:errors="*{lastName}">Last Name Error</span>-->
-<!--    </strong></mark>-->
-<!--    <br/>-->
-<!--    Email-->
-<!--    <input type="email" id="email" placeholder="Email"-->
-<!--           th:field="*{email}"/>-->
-<!--    <mark><strong>-->
-<!--        <span th:if="${#fields.hasErrors('email')}"-->
-<!--              th:errors="*{email}">Email Error</span>-->
-<!--    </strong></mark>-->
-<!--    <br/>-->
-<!--    Username-->
-<!--    <input type="text" id="username" placeholder="Username"-->
-<!--           th:field="*{username}"/>-->
-<!--    <mark><strong>-->
-<!--        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>-->
-<!--    </strong></mark>-->
-<!--    <br/>-->
-<!--    Password-->
-<!--    <input type="password" id="password" placeholder="Password"-->
-<!--           th:field="*{password}"/>-->
-<!--    <mark><strong>-->
-<!--        <span th:if="${#fields.hasErrors('password')}"-->
-<!--              th:errors="*{password}">Password Error</span>-->
-<!--    </strong></mark>-->
-<!--    <br/>-->
-<!--    <br/>-->
-<!--    <button type="submit" class="btn btn-info">Submit</button>-->
-<!--</form>-->
-<!-- Page Container -->
-
 
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
     <!-- The Grid -->
@@ -94,6 +44,10 @@
                                    placeholder="example@domain.com" th:field="*{email}">
                             <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>
 
+                            <label>Username</label>
+                            <input type="text" class="w3-input w3-border w3-padding" th:field="*{username}">
+                            <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
+
                             <label>Password</label>
                             <input type="password" class="w3-input w3-border w3-padding" th:field="*{password}">
                             <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>
@@ -101,12 +55,6 @@
 <!--                            <label>Confirm Password</label>-->
 <!--                            <input type="password" class="w3-input w3-border w3-padding" th:field="*{confirmPassword}">-->
 <!--                            <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span><br/>-->
-
-
-                            <label>Username</label>
-                            <input type="text" class="w3-input w3-border w3-padding" th:field="*{username}">
-                            <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
-
 
                             <fieldset>
                                 <legend>Interests:</legend>

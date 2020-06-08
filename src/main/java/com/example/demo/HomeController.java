@@ -177,7 +177,6 @@ public class HomeController {
 
         model.addAttribute("allUsers", userRepository.findAll());
 
-//        chekc if the following is not repetition @both herea and also in "/disable-user"
         String username = principal.getName();
         model.addAttribute("user", userRepository.findByUsername(username));
         if(userService.getUser() != null){
@@ -214,12 +213,6 @@ public class HomeController {
             return "secure";
         }
 
-
-//    @RequestMapping("/logout")
-//    public String logout() {
-//        return "redirect:/login?logout=true";
-//    }
-
     @GetMapping("/guestRegister")
     public String guestRegisterationPage(Model model) {
         model.addAttribute("user", new User());
@@ -237,11 +230,6 @@ public class HomeController {
         if(userService.getUser() != null){
             model.addAttribute("loggedUser", userService.getUser());
         }
-//        if(!user.getPassword().equals(user.getConfirmPassword())){
-//            model.addAttribute("message", "Entered Passwords are not identical");
-//            return "guestRegister";
-//        }
-//        user.setConfirmPassword("");
 
         if(result.hasErrors()) {
             user.clearPassword();
@@ -286,4 +274,5 @@ public class HomeController {
         }
         return "profile";
     }
+
 }
