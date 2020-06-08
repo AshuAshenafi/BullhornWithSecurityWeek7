@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <th:block th:fragment="headStuff">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/69e5f61610.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    </th:block>
+
+</head>
+<body>
+<div th:fragment="navlinks">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" title="Selam!"><i class="fas fa-blog"></i> &nbsp <strong>ሰላም</strong></a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="//codeply.com">Codeply</a>-->
+<!--            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}"><i class="fas fa-house-damage"></i>&nbsp Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/post}" sec:authorize="isAuthenticated()">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/displayUsers}" sec:authorize="isAuthenticated()">Admin</a>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="mx-auto  order-0">
+            <div class="row"> <span style="color: white" sec:authorize="!isAuthenticated()">Welcome</span>
+                <a class="navbar-brand mx-auto" th:href="@{/profile}" >
+                    <span sec:authorize="isAuthenticated()">
+                        [[${loggedUser.firstName}]]&nbsp[[${loggedUser.lastName}]]
+                    </span>
+                </a>
+            </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/guestRegister}" style="color: white" title="Sign Up!"><i class="fas fa-user-plus"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

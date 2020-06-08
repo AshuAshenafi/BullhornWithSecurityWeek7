@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <th:block th:insert="layouts :: header"></th:block>
+    <th:block th:insert="test-navbar :: headStuff"></th:block>
 </head>
 <body>
+<!-- Navbar -->
+<nav th:replace="test-navbar :: navlinks"></nav>
 
-<br/>
-<nav th:replace="layouts :: navbar"></nav>
 <div class="container">
     <div class="jumbotron d-flex justify-content-center" style="background-color: darkgreen">
         <div class="col-md-8">
@@ -27,7 +25,8 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Date: <h4 th:text="${message.postedDate}"></h4></li>
                     <li class="list-group-item">Your Message: <h4 th:text="${message.content}"></li>
-                    <li class="list-group-item"></li>
+                    <li class="list-group-item">Following:</li>
+                    <li class="list-group-item">Followed By:</li>
                 </ul>
                 <div class="card-body">
                     <a href="http://www.twitter.com" class="card-link">twitter</a>

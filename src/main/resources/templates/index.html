@@ -1,22 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
-    <th:block th:insert="layouts :: header"></th:block>
+    <th:block th:insert="test-navbar :: headStuff"></th:block>
 </head>
 <body>
-<nav th:replace="layouts :: navbar"></nav>
-<h1>Index page Navigate</h1>
+<!-- Navbar -->
+<nav th:replace="test-navbar :: navlinks"></nav>
 
-<a th:href="@{/course}"><h3>Course</h3></a><br>
-<a th:href="@{/teacher}"><h3>Teacher</h3></a><br>
-<a th:href="@{/student}"><h3>Student</h3></a><br>
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Accordion -->
+        <div class="w3-card w3-round">
+            <div class="w3-white">
+                <div id="Demo3" class="w3-hide w3-container">
+                    <div class="w3-row-padding">
+                        <br>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br/>
+    </div>
+
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"th:each="article:${articles}"><br>
+            <!--<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">-->
+            <span class="w3-right w3-opacity" th:text="${article.publishedAt}"></span>
+            <h4 th:text="${article.title}"></h4><br/>
+            <hr class="w3-clear">
+            <span th:text="${article.description}"></span>
+            <div><img class="w3-border w3-image" th:src="${article.image}"></div>
+            <a th:href="${article.url}"></a>
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div class="w3-half">
+                    <!--<img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">-->
+                </div>
+                <div class="w3-half">
+                    <!--<img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">-->
+                </div>
+            </div>
+        </div>
+        <!-- End Middle Column -->
+    </div>
+    <!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+</div>
 <br>
-<br>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="logout">
-</form>
+
+
+
+
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <th:block th:insert="layouts :: header"></th:block>
+    <th:block th:insert="test-navbar :: headStuff"></th:block>
     <style>
         #poster{
             color:blue;
@@ -23,13 +23,13 @@
 </head>
 <body>
 <br/>
-<nav th:replace="layouts :: navbar"></nav>
+<nav th:replace="test-navbar :: navlinks"></nav>
 <br/>
 <div class="container" >
     <div class="jumbotron">
         <h1>Basic Bullhorn App</h1>
         <p>This is a simple application that lists messages together with the content, posted date, and photo</p>
-        <a href="/add-form" class="btn btn-info btn-lg"   >Add a Message</a>
+        <a href="/add-post" class="btn btn-info btn-lg"   >Add Post</a>
     </div>
 </div>
 <!--////////////////////////////////////////////////////////////////////////////////////////-->
@@ -47,9 +47,10 @@
                 <div class="col-md-3 d-flex justify-content-between align-items-center" style="padding: 0%">
                     <a class="btn btn-primary btn-sm"  th:href = "@{/update-message/{id}(id=${message.id})}">Update</a>
 
-                    <a class="btn btn-success btn-sm" th:href = "@{/detail/{id}(id=${message.id})}">Details</a>
-
-                    <a class="btn btn-danger btn-sm" th:href = "@{/delete/{id}(id=${message.id})}">Delete</a>
+                    <a class="btn btn-success btn-sm" th:href = "@{/detail/{id}(id=${message.id})} ">
+                        Details</a>
+                    <a class="btn btn-danger btn-sm" th:href = "@{/delete/{id}(id=${message.id})}"
+                       onclick="if(!(confirm('Are you sure you want to delete this Post?'))) return false" disabled>Delete</a>
                 </div>
             </div>
             <div class="row">
@@ -62,9 +63,9 @@
             <!--        <div class="container d-flex justify-content-around">-->
             <div class="row d-flex justify-content-between">
                 <div class="col d-flex justify-content-center" title="Share"><i class="fas fa-share-alt"></i></div>
-                <div class="col d-flex justify-content-center">Like</div>
-                <div class="col d-flex justify-content-center">Viewers</div>
-                <div class="col d-flex justify-content-center">Comment</div>
+                <div class="col d-flex justify-content-center" title="Like"><i class="fas fa-thumbs-up"></i></div>
+                <div class="col d-flex justify-content-center" title="Comment"><i class="fas fa-comment"></i></div>
+                <div class="col d-flex justify-content-center" title="Follow">Follow</div>
             </div>
             <!--        </div>-->
         </div>

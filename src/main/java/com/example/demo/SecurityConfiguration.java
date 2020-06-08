@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -24,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+                .antMatchers("/", "/guestRegister", "/guestProcess", "/error").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/displayUsers").hasRole("ADMIN")
 //                .antMatchers("/register").hasRole("ADMIN")
@@ -31,20 +33,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/delete-admin/**").hasRole("ADMIN")
                 .antMatchers("/disable-user/**").hasRole("ADMIN")
                 .antMatchers("/delete-user/**").hasRole("ADMIN")
+                .antMatchers("/secure/**").hasAnyRole("ADMIN", "USER")      // can go to profile page
+                .antMatchers("/profile").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/formTest").permitAll()
-
-                .antMatchers("/secure/**").hasRole("ADMIN")
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/guestRegister").permitAll()
-                .antMatchers("/guestProcess").permitAll()
-                .antMatchers("/").hasAnyRole("ADMIN", "USER")
 
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout=true").permitAll();
 
         //The following two line of code are mandatory to access

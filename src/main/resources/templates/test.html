@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>List</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        #poster{
+            color:blue;
+        }
+        table, th, td {
+            border-collapse:collapse;
+
+            border: none;
+        }
+        hr {
+            height: 10px;
+            border: 0;
+            box-shadow: 0 10px 10px -10px #8c8b8b inset;
+        }
+        #nav {
+            height: 7%;
+            background-color: rgb(52, 152, 219);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            font-family: Calibri;
+            font-size: 100%;
+            text-align: center;
+            display: table;
+        }
+        #nav div {
+            display: table-cell;
+            height: 100%;
+            vertical-align: middle;
+        }
+        #nav div:hover {
+            background-color: white;
+            /*background-color: rgb(41, 128, 185);*/
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+    
+
+<body>
+<nav th:replace="base :: navlinks"></nav>
+<h1>New Test Page</h1>
+
+<form action="#">
+    First Name
+<!--    <input type="text" id="firstName" placeholder="First Name here" th:field="*{firstName}"/>-->
+    <mark>
+        <strong>
+<!--            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>-->
+        </strong>
+    </mark>
+    <br/>
+    Last Name
+<!--    <input type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}"/>-->
+    <mark><strong>
+<!--        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>-->
+    </strong></mark>
+    <br/>
+    Email
+<!--    <input type="email" id="email" placeholder="Email" th:field="*{email}"/>-->
+    <mark><strong>
+<!--        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>-->
+    </strong></mark>
+    <br/>
+    Username
+<!--    <input type="text" id="username" placeholder="Username" th:field="*{username}"/>-->
+    <mark><strong>
+<!--        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>-->
+    </strong></mark>
+    <br/>
+    Password
+<!--    <input type="password" id="password" placeholder="Password" th:field="*{password}"/>-->
+    <mark><strong>
+<!--        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>-->
+    </strong></mark>
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<div th:replace="base :: footer"></div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

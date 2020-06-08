@@ -1,10 +1,13 @@
 package com.example.demo;
 
+import com.example.demo.Model.News.Interest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users_db")
@@ -41,6 +44,11 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+//    private String confirmPassword;
+
+    @ManyToMany
+    private Set<Interest> interests = new HashSet<>();
+
     public User() {
     }
 
@@ -52,6 +60,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.enabled = enabled;
+
     }
 
     public void clearPassword(){
@@ -115,9 +124,23 @@ public class User {
         return enabled;
     }
 
+//    public String getConfirmPassword() {
+//        return confirmPassword;
+//    }
+//
+//    public void setConfirmPassword(String confirmPassword) {
+//        this.confirmPassword = confirmPassword;
+//    }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
+    public Set<Interest> getInterests() {
+        return interests;
+    }
 
+    public void setInterests(Set<Interest> interests) {
+        this.interests = interests;
+    }
 }

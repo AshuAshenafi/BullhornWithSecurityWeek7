@@ -2,22 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>secure</title>
-    <th:block th:insert="test-navbar :: headStuff"></th:block>
+    <title>profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/69e5f61610.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- Navbar -->
 <nav th:replace="test-navbar :: navlinks"></nav>
-
-<h1>Secure Page</h1>
+<h1>Profile Page</h1>
 <h4>Name:</h4>
-<p>[[${user.firstName}]]<span style="color: white">-</span>[[${user.lastName}]]</p>
+<p>[[${loggedUser.firstName}]]<span style="color: white">-</span>[[${loggedUser.lastName}]]</p>
 <br/>
 <h4>Email:</h4>
-<p th:text="${user.email}"></p>
-
-
-<div th:replace="base :: footer"></div>
+<p th:text="${loggedUser.email}"></p>
+<h4>Follower</h4>
+<h4>Phone Number</h4>
+<h4>Address</h4>
+<h4>EDIT PROFILE</h4>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

@@ -3,46 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-    <th:block th:insert="layouts :: header"></th:block>
+    <th:block th:insert="test-navbar :: headStuff"></th:block>
+    <style>
+        .forBorder {
+            border-radius: 3rem;
+        }
+    </style>
 </head>
 <body>
-<nav th:replace="layouts :: navbar-guest"></nav>
-<h1>Login Page</h1>
-<hr>
-<p>You can login as <strong>USER</strong>:</p>
-<p>Username = <strong>bart</strong> and Password = <strong>bart</strong></p>
-<hr>
-<p>You can login as <strong>ADMIN</strong>:</p>
-<p>Username = <strong>admin</strong> and Password = <strong>admin</strong></p>
-<hr>
-<p>You can login as both <strong>USER</strong> and <strong>ADMIN</strong>:</p>
-<p>Username = <strong>super</strong> and Password = <strong>super</strong></p>
-<hr>
+<!-- Navbar -->
+<nav th:replace="test-navbar :: navlinks"></nav>
 
+<!--<hr>-->
 
-<div th:if="${param.error}" style="color: red">
-    Invalid username or password
+<!--<p>USER</p>: <p><strong>bart</strong>/<strong>bart</strong></p>-->
+<!--<p>ADMIN</p>: <p><strong>admin</strong>/<strong>admin</strong></p>-->
+<!--<p>USER-ADMIN</p>: <p><strong>super</strong>/<strong>super</strong></p>-->
+
+<!--<hr>-->
+
+<!--<div th:if="${param.error}" style="color: red">-->
+<!--    Invalid username or password-->
+<!--</div>-->
+
+<!--<div th:if="${param.logout}" style="color: green">-->
+<!--    YOU HAVE BEEN LOGGED OUT.-->
+<!--    <br>-->
+<!--</div>-->
+
+<!--<br>-->
+
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <div>-->
+<!--        <label>User name: <input type="text" name="username"/></label>-->
+<!--    </div>-->
+<!--    <br/>-->
+<!--    <div>-->
+<!--        <label>Password: <input type="password" name="password"/></label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <input type="submit" value="Sign in"/>-->
+<!--    </div>-->
+<!--</form>-->
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+    </div>
+
+    <!-- Middle Column -->
+
+    <div class="w3-col m7">
+
+        <div id="login"  class="w3-container w3-card w3-white w3-round w3-margin forBorder"><br>
+            <h1 class="w3-center">Login</h1><br>
+            <hr class="w3-clear">
+            <div class="w3-row-padding" style="margin:0 -16px">
+            </div>
+        </div>
+        <div class="w3-row-padding">
+            <div class="w3-col m12">
+                <div class="w3-card w3-round w3-white forBorder">
+                    <div class="w3-container w3-padding">
+
+                        <div class="error" th:if="${param.error}" style="color: red">
+                            <div class="w3-center">Invalid username or password.</div><br/><br/>
+                        </div>
+                        <div class="success" th:if="${param.logout}" style="color: green">
+                            <div class="w3-center">You have been logged out.</div><br/><br/>
+                        </div>
+
+                        <form th:action="@{/login}" method="post">
+                            <label>Username</label>
+                            <input type="text" name="username" class="w3-input w3-border w3-padding"><br/>
+                            <label>Password</label>
+                            <input type="password" name="password" class="w3-input w3-border w3-padding"><br/>
+                            <div class="w3-center">
+                                <button type="submit" class="w3-button w3-theme">
+                                    <i class="fa fa-pencil"></i> Sign In
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
 </div>
-
-<div th:if="${param.logout}" style="color: green">
-    YOU HAVE BEEN LOGGED OUT.
-    <br>
-</div>
-
 <br>
 
-<form th:action="@{/login}" method="post">
-    <div>
-        <label>User name: <input type="text" name="username"/></label>
-    </div>
-    <br/>
-    <div>
-        <label>Password: <input type="text" name="password"/></label>
-    </div>
-    <div>
-        <input type="submit" value="Sign in"/>
-    </div>
-</form>
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

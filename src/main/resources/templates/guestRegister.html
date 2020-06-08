@@ -3,60 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <title>guest-register</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/69e5f61610.js" crossorigin="anonymous"></script>
+    <th:block th:insert="test-navbar :: headStuff"></th:block>
 </head>
-<body>
-<!--<nav th:replace="layouts :: navbar-guest"></nav>-->
-<h4>New User Registration</h4>
+<body class="w3-theme-l5">
+<!-- Navbar -->
+<nav th:replace="test-navbar :: navlinks"></nav>
 
-<form autocomplete="off"
-      action="#"
-      th:action="@{/guestProcess}"
-      th:object="${user}" method="post">
-    First Name
-    <input type="text" id="firstName" placeholder="First Name here" th:field="*{firstName}"/>
-    <mark>
-        <strong>
-            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
-        </strong>
-    </mark>
-    <br/>
-    Last Name
-    <input type="text" id="lastName" placeholder="Last Name"
-           th:field="*{lastName}"/>
-    <mark><strong>
-        <span th:if="${#fields.hasErrors('lastName')}"
-              th:errors="*{lastName}">Last Name Error</span>
-    </strong></mark>
-    <br/>
-    Email
-    <input type="email" id="email" placeholder="Email"
-           th:field="*{email}"/>
-    <mark><strong>
-        <span th:if="${#fields.hasErrors('email')}"
-              th:errors="*{email}">Email Error</span>
-    </strong></mark>
-    <br/>
-    Username
-    <input type="text" id="username" placeholder="Username"
-           th:field="*{username}"/>
-    <mark><strong>
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
-    </strong></mark>
-    <br/>
-    Password
-    <input type="text" id="password" placeholder="Password"
-           th:field="*{password}"/>
-    <mark><strong>
-        <span th:if="${#fields.hasErrors('password')}"
-              th:errors="*{password}">Password Error</span>
-    </strong></mark>
-    <br/>
-    <br/>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<!--<h4>New User Registration</h4>-->
+
+<!--<form autocomplete="off"-->
+<!--      action="#"-->
+<!--      th:action="@{/guestProcess}"-->
+<!--      th:object="${user}" method="post">-->
+<!--    First Name-->
+<!--    <input type="text" id="firstName" placeholder="First Name here" th:field="*{firstName}"/>-->
+<!--    <mark>-->
+<!--        <strong>-->
+<!--            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>-->
+<!--        </strong>-->
+<!--    </mark>-->
+<!--    <br/>-->
+<!--    Last Name-->
+<!--    <input type="text" id="lastName" placeholder="Last Name"-->
+<!--           th:field="*{lastName}"/>-->
+<!--    <mark><strong>-->
+<!--        <span th:if="${#fields.hasErrors('lastName')}"-->
+<!--              th:errors="*{lastName}">Last Name Error</span>-->
+<!--    </strong></mark>-->
+<!--    <br/>-->
+<!--    Email-->
+<!--    <input type="email" id="email" placeholder="Email"-->
+<!--           th:field="*{email}"/>-->
+<!--    <mark><strong>-->
+<!--        <span th:if="${#fields.hasErrors('email')}"-->
+<!--              th:errors="*{email}">Email Error</span>-->
+<!--    </strong></mark>-->
+<!--    <br/>-->
+<!--    Username-->
+<!--    <input type="text" id="username" placeholder="Username"-->
+<!--           th:field="*{username}"/>-->
+<!--    <mark><strong>-->
+<!--        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>-->
+<!--    </strong></mark>-->
+<!--    <br/>-->
+<!--    Password-->
+<!--    <input type="password" id="password" placeholder="Password"-->
+<!--           th:field="*{password}"/>-->
+<!--    <mark><strong>-->
+<!--        <span th:if="${#fields.hasErrors('password')}"-->
+<!--              th:errors="*{password}">Password Error</span>-->
+<!--    </strong></mark>-->
+<!--    <br/>-->
+<!--    <br/>-->
+<!--    <button type="submit" class="btn btn-info">Submit</button>-->
+<!--</form>-->
+<!-- Page Container -->
+
+
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+    </div>
+
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <h1 class="w3-center">Register</h1><br>
+            <hr class="w3-clear">
+            <div class="w3-row-padding" style="margin:0 -16px">
+            </div>
+        </div>
+        <div class="w3-row-padding">
+            <div class="w3-col m12">
+                <div class="w3-card w3-round w3-white">
+                    <div class="w3-container w3-padding">
+                        <form th:object = "${user}" th:action="@{/guestProcess}" method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" th:field="*{id}">
+                            <label>First Name</label>
+                            <input type="text" class="w3-input w3-border w3-padding" th:field="*{firstName}">
+                            <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br/>
+
+                            <label>Last Name</label>
+                            <input type="text" class="w3-input w3-border w3-padding" th:field="*{lastName}">
+                            <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br/>
+
+                            <label>Email</label>
+                            <input type="email" class="w3-input w3-border w3-padding"
+                                   placeholder="example@domain.com" th:field="*{email}">
+                            <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>
+
+                            <label>Password</label>
+                            <input type="password" class="w3-input w3-border w3-padding" th:field="*{password}">
+                            <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>
+
+<!--                            <label>Confirm Password</label>-->
+<!--                            <input type="password" class="w3-input w3-border w3-padding" th:field="*{confirmPassword}">-->
+<!--                            <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span><br/>-->
+
+
+                            <label>Username</label>
+                            <input type="text" class="w3-input w3-border w3-padding" th:field="*{username}">
+                            <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
+
+
+                            <fieldset>
+                                <legend>Interests:</legend>
+                                <select class="form-control" th:field="*{interests}" multiple>
+                                    <option th:each ="interest:${interests}"
+                                            th:value="${interest.id}"
+                                            th:text="${interest.name}"></option>
+                                </select>
+                            </fieldset>
+                            <br/><br/>
+                            <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+</div>
+<br>
+
+<div th:replace="base :: footer"></div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

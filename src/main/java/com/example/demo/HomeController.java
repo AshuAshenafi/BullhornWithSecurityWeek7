@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.Repositories.InterestRepository;
+import com.example.demo.Repositories.MessageRepository;
+import com.example.demo.Repositories.RoleRepository;
+import com.example.demo.Repositories.UserRepository;
+import com.example.demo.Services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,19 +34,36 @@ public class HomeController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    NewsService newsService;
+
+    @Autowired
+    InterestRepository interestRepository;
+
     @RequestMapping("/")
     public String index(Model model) {
 
         if(userService.getUser() != null){
             model.addAttribute("loggedUser", userService.getUser());
         }
+        model.addAttribute("articles", newsService.articlesByCategory("General"));
+        // this could be "Business", "Technology", "Entertainment", "General", "Health", "Science", "Sports"
 
-        model.addAttribute("messages", messageRepository.findAll());
-
-        return "list";
-
+        return "index";
     }
-    @GetMapping("/add-form")
+
+    // list all the posts and users who posted here
+    @RequestMapping("/post")                //check????
+    public String homePage(Model model) {
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+        model.addAttribute("messages", messageRepository.findAll());
+        return "posts";
+    }
+
+    // post inputing form
+    @GetMapping("/add-post")
     public String newMessage(Model model){
         Message messageWithUserName = new Message();
         if(userService.getUser() != null) {
@@ -52,10 +74,10 @@ public class HomeController {
             model.addAttribute("loggedUser", userService.getUser());
         }
         model.addAttribute("message", messageWithUserName);
-        return "form";
+        return "addPost";
     }
 
-    @PostMapping("/process-form")
+    @PostMapping("/process-post")
     public String processMessage(@Valid@ModelAttribute("message") Message message,
                                  BindingResult result, Model model) {
 
@@ -67,11 +89,11 @@ public class HomeController {
         }
 
         if (result.hasErrors()) {
-            return "form";
+            return "addPost";
         }
 
         messageRepository.save(message);
-        return "redirect:/";
+        return "redirect:/post";
     }
 
     @RequestMapping("/detail/{id}")
@@ -80,11 +102,12 @@ public class HomeController {
         if(userService.getUser() != null){
             model.addAttribute("loggedUser", userService.getUser());
         }
-        return "show";
+        return "detail";
     }
 
     @RequestMapping("/delete/{id}")
     public String delMessage(@PathVariable("id") long id){
+
         messageRepository.deleteById(id);
         return "redirect:/";
     }
@@ -101,8 +124,7 @@ public class HomeController {
             }
             model.addAttribute("loggedUser", userService.getUser());
         }
-
-        return "form";
+        return "addPost";
     }
 
     @RequestMapping("/displayUsers")
@@ -121,7 +143,12 @@ public class HomeController {
     public String disableUser(@PathVariable("id") long id, Model model, Principal principal){
         User tempUser = new User();
         tempUser = userRepository.findById(id).get();
+        if(tempUser.isEnabled()){
         tempUser.setEnabled(false);
+        }
+        else{
+            tempUser.setEnabled(true);
+        }
         userRepository.save(tempUser);
         model.addAttribute("allUsers", userRepository.findAll());
         String username = principal.getName();
@@ -188,14 +215,18 @@ public class HomeController {
         }
 
 
-    @RequestMapping("/logout")
-    public String logout() {
-        return "redirect:/login?logout=true";
-    }
+//    @RequestMapping("/logout")
+//    public String logout() {
+//        return "redirect:/login?logout=true";
+//    }
 
     @GetMapping("/guestRegister")
     public String guestRegisterationPage(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("interests", interestRepository.findAll());
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
         return "guestRegister";
     }
 
@@ -203,6 +234,14 @@ public class HomeController {
     public String processRegisterationPage(@Valid @ModelAttribute("user") User user,
                                            BindingResult result, Model model) {
         model.addAttribute("user", user);
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+//        if(!user.getPassword().equals(user.getConfirmPassword())){
+//            model.addAttribute("message", "Entered Passwords are not identical");
+//            return "guestRegister";
+//        }
+//        user.setConfirmPassword("");
 
         if(result.hasErrors()) {
             user.clearPassword();
@@ -210,7 +249,6 @@ public class HomeController {
         }
         else {
             model.addAttribute("message", "User Account Created");
-
             user.setEnabled(true);
             Role role = new Role(user.getUsername(), "ROLE_USER");
             Set<Role> roles = new HashSet<Role>();
@@ -218,11 +256,11 @@ public class HomeController {
 
             roleRepository.save(role);
             userRepository.save((user));
-
         }
 
         return "redirect:/";
     }
+    // to check the form grid structure is working
     @RequestMapping("/formTest")
     public String formTest(Model model) {
         if(userService.getUser() != null){
@@ -231,5 +269,21 @@ public class HomeController {
 
         model.addAttribute("messages", messageRepository.findAll());
         return "formTest";
+    }
+
+    //to check if the navbar is working
+    @GetMapping("/test")
+    public String testPage(Model model){
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+        return "test-navbar";
+    }
+    @GetMapping("/profile")
+    public String loggedUserProfilePage(Model model){
+        if(userService.getUser() != null){
+            model.addAttribute("loggedUser", userService.getUser());
+        }
+        return "profile";
     }
 }
